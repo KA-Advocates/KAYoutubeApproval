@@ -1,0 +1,8 @@
+1. Install NodeJS latest version & yarn or npm
+2. On the terminal, run 'npm install' or 'yarn install' to install dependencies
+3. You need to download the chromedriver for your OS and your Chrome version from https://sites.google.com/a/chromium.org/chromedriver/downloads and put it in the directory of the script
+  NOTE: If using Windows, you will not be able to run this from the WSL terminal. You must use the Windows terminal (e.g. GIT Bash)
+4. Put the list of video files in videos.csv, one URL on a line
+5. Fill config.csv with your Youtube account(s)
+6. Open looksgood.js and change "LANGUAGE" to your preferred locale (note, only Bulgarian/bg is tested with the UI)
+7. Run the script with 'node looksgood.js videos.csv'. Optionally, add the '--no-headless' parameter at the end in order to see what the script is doing.
