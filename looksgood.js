@@ -132,11 +132,11 @@ async function selectLanguage(scraper) {
   console.log('Setting language')
   await picker[0].click()
   await scraper.sleep(1000)
-  // let languageMenu = await scraper.findElements('li.yt-uix-languagepicker-menu-item[data-value=bg] .caption-editor-language-menu-item')
+  // let languageMenu = await scraper.findElements(`li.yt-uix-languagepicker-menu-item[data-value=${LANGUAGE}] .caption-editor-language-menu-item`)
   // if (languageMenu.length) {
   //   await languageMenu[0].click()
   // } else {
-    languageMenu = await scraper.findElement(`li.yt-uix-languagepicker-menu-item[data-value=${LANGUAGE}] .caption-editor-language-menu-item`)//, li.yt-uix-languagepicker-menu-item[data-value=bg] .yt-uix-button-menu-item')
+    languageMenu = await scraper.findElement(`li.yt-uix-languagepicker-menu-item[data-value=${LANGUAGE}] .caption-editor-language-menu-item`)//, li.yt-uix-languagepicker-menu-item[data-value=${LANGUAGE}] .yt-uix-button-menu-item')
     await languageMenu.click()
   //}
   await scraper.sleep(1000)
@@ -144,7 +144,7 @@ async function selectLanguage(scraper) {
   try {
     await closeButton.click()
   } catch(e) { /* close button might be hidden */ }
-  console.log('Language set to Bulgarian')
+  console.log(`Language set to ${LANGUAGE}`)
   await scraper.sleep(200)
 }
 
