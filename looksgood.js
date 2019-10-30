@@ -4,8 +4,6 @@ var chrome = require('selenium-webdriver/chrome')
 
 const parse = require('csv-parse/lib/sync')
 const fs = require('fs')
-
-const xlsx = require('node-xlsx').default;
 const ExcelJS = require('exceljs');
 
 const CONFIG = './config.csv'
