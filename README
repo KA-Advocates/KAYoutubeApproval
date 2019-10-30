@@ -5,7 +5,7 @@ This script attempts to automatically login with a couple of Youtube accounts in
 3. In the terminal (Command Prompt for Windows), navigate to this folder and run 'npm install' to install dependencies
 4. You will need to download the chromedriver for your OS and your Chrome version from https://sites.google.com/a/chromium.org/chromedriver/downloads and put it in the directory of the script
   NOTE: If using Windows, you will not be able to run this from the WSL terminal. You must use the Windows terminal (or any converter like GIT bash, MSYS, etc)
-5. Put the list of video files in videos.csv, one URL on a line
+5. Put the list of video files in videos.csv, one URL on a line. If you can't easily get the URLs (e.g. if you are copying from the Khan Academy portal, then you can also save to a XLSX file like videos.xlsx)
 6. Fill config.csv with your Youtube account(s)
 7. Open looksgood.js and change "LANGUAGE" to your preferred locale (note, only Bulgarian/bg is tested with the UI)
 8. Back in the terminal, run the script with 'node looksgood.js videos.csv'. Optionally, add the '--no-headless' parameter at the end in order to see what the script is doing.

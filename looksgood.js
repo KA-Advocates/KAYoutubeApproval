@@ -5,6 +5,9 @@ var chrome = require('selenium-webdriver/chrome')
 const parse = require('csv-parse/lib/sync')
 const fs = require('fs')
 
+const xlsx = require('node-xlsx').default;
+const ExcelJS = require('exceljs');
+
 const CONFIG = './config.csv'
 const LANGUAGE = 'bg'
 
@@ -123,6 +126,18 @@ function readVideosList(filename) {
   return parse(fs.readFileSync(filename,'utf8'))
 }
 
+async function readFromXLSX(filename) {
+  console.log('Reading video URLs from: ', filename)
+  let workbook = new ExcelJS.Workbook()
+  await workbook.xlsx.readFile(filename)
+  let worksheet = workbook.getWorksheet(1)
+  let results = []
+  worksheet.eachRow(function(row, rowNumber) {
+    results.push([row.getCell(1).value.hyperlink]);
+  });
+  return results;
+}
+
 async function selectLanguage(scraper) {
   let picker = await scraper.findElements('button[data-button-menu-id=yt-languagepicker-menu-lang]')
   if (!picker.length) {
@@ -132,7 +147,7 @@ async function selectLanguage(scraper) {
   console.log('Setting language')
   await picker[0].click()
   await scraper.sleep(1000)
-  // let languageMenu = await scraper.findElements(`li.yt-uix-languagepicker-menu-item[data-value=${LANGUAGE}] .caption-editor-language-menu-item`)
+  // let languageMenu = await scraper.findElements('li.yt-uix-languagepicker-menu-item[data-value=${LANGUAGE}] .caption-editor-language-menu-item')
   // if (languageMenu.length) {
   //   await languageMenu[0].click()
   // } else {
@@ -224,7 +239,11 @@ function credentialsFromConfig() {
   }
   let scraper = new SeleniumScraper()
   let credentialsSet = credentialsFromConfig()
-  let urls = readVideosList(process.argv[2])
+  let urls = []
+  if (process.argv[2].match(/\.xlsx/))
+    urls = await readFromXLSX(process.argv[2]);
+  else
+    urls = readVideosList(process.argv[2]);
   for (let credentials of credentialsSet) {
     console.log('=================')
     console.log('Account: ', credentials.email)
